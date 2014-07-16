@@ -1,0 +1,33 @@
+{
+  "author": "Paul Serby <paul@serby.net>",
+  "name": "configury",
+  "description": "Easy management of environment based configuration",
+  "version": "0.0.1",
+  "tags": [],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:serby/configury"
+  },
+  "publishConfig": {
+    "registry":"http://registry.npmjs.org"
+  },
+  "main": "",
+  "scripts": {
+    "lint": "./node_modules/.bin/jshint . --reporter=./node_modules/jshint-full-path/index.js",
+    "pretest": "npm run-script lint",
+    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -R spec -r should",
+    "posttest": "./node_modules/.bin/istanbul check-coverage && rm -rf coverage",
+    "prepublish": "npm test && npm prune"
+  },
+  "engines": {
+    "node": ">=0.10"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "1",
+    "should": "2",
+    "istanbul": "~0.1.44",
+    "jshint": "~2.3.0",
+    "jshint-full-path": "~0.1.0"
+  }
+}
