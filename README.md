@@ -67,7 +67,7 @@ var configury = require('configury')
 
 config.set('Alice', 'Bob')
 config.raw()
-//-> { "global": { "Alice": "Bob" } ... }
+//-> { "myCustomeGlobal": { "Alice": "Bob" } ... }
 
 ```
 
@@ -79,7 +79,7 @@ var configury = require('configury')
   , mySection = config.section('mySection')
 
 mySection.set('Alice', 'Bob')
-mySection.raw()
+config.raw()
 //-> { "global": { ... } "mySection" { "Alice": "Bob" } }
 
 ```
