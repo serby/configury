@@ -10,6 +10,25 @@ Easy management of environment based configuration
 
 ## Usage
 
+### configury([path, defaultSection])
+
+Using in memory configuration
+
+```js
+var configury = require('configury')
+  , config = configury()
+
+```
+
+Using configuration file on disk
+
+
+```js
+var configury = require('configury')
+  , config = configury('properties.json')
+
+```
+
 ### config.raw()
 
 ```js
@@ -81,6 +100,16 @@ var configury = require('configury')
 mySection.set('Alice', 'Bob')
 config.raw()
 //-> { "global": { ... } "mySection" { "Alice": "Bob" } }
+
+```
+
+### config.merge()
+
+```js
+var configury = require('configury')
+  , config = configury('./properties.json')
+
+
 
 ```
 
