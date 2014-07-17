@@ -133,7 +133,7 @@ var configury = require('configury')
 config.set('foo', 'bar')
 //-> { "global": { "foo": "bar" } ... }
 config.merge({ 'global': { 'foo': 'woo' }, 'pickles': 'bananas' })
-//-> { "global": { "foo": "bar" }, "pickles": "bananas" }
+//-> { "global": { "foo": "woo" }, "pickles": "bananas" }
 
 ```
 
