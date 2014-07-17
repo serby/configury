@@ -25,7 +25,7 @@ Using configuration file on disk
 
 ```js
 var configury = require('configury')
-  , config = configury('properties.json')
+  , config = configury('./properties.json')
 
 ```
 
