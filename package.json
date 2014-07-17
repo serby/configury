@@ -9,9 +9,9 @@
     "url": "git@github.com:serby/configury"
   },
   "publishConfig": {
-    "registry":"http://registry.npmjs.org"
+    "registry": "http://registry.npmjs.org"
   },
-  "main": "",
+  "main": "configury.js",
   "scripts": {
     "lint": "./node_modules/.bin/jshint . --reporter=./node_modules/jshint-full-path/index.js",
     "pretest": "npm run-script lint",
@@ -22,12 +22,16 @@
   "engines": {
     "node": ">=0.10"
   },
-  "dependencies": {},
+  "dependencies": {
+    "lodash.merge": "^2.4.1",
+    "traverse": "^0.6.6"
+  },
   "devDependencies": {
-    "mocha": "1",
-    "should": "2",
     "istanbul": "~0.1.44",
     "jshint": "~2.3.0",
-    "jshint-full-path": "~0.1.0"
+    "jshint-full-path": "~0.1.0",
+    "mocha": "1",
+    "rewire": "^2.1.0",
+    "should": "2"
   }
 }
