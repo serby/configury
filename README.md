@@ -12,7 +12,7 @@ Easy management of environment based configuration
 
 ### configury([path, defaultSection])
 
-Using in memory configuration
+Using in-memory configuration
 
 ```js
 var configury = require('configury')
@@ -26,6 +26,14 @@ Using configuration file on disk
 ```js
 var configury = require('configury')
   , config = configury('properties.json')
+
+```
+
+Using default config section other than 'global'
+
+```js
+var configury = require('configury')
+  , config = configury('properties.json', 'myDefaultConfigSection')
 
 ```
 
