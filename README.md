@@ -90,11 +90,22 @@ Setting a variable in 'myCustomGlobal'
 
 ```js
 var configury = require('configury')
-  , config = configury('./properties.json', 'myCustomeGlobal')
+  , config = configury('./properties.json', 'myCustomGlobal')
 
 config.set('Alice', 'Bob')
 config.raw()
-//-> { "myCustomeGlobal": { "Alice": "Bob" } ... }
+//-> { "myCustomGlobal": { "Alice": "Bob" } ... }
+
+```
+
+### config.section(section)
+
+```js
+var configury = require('configury')
+  , config = configury('./properties.json', 'myCustomGlobal')
+
+var mySection = config.section('mySection')
+//-> mySection = { set: function(key, value), merge: function(object) }
 
 ```
 
