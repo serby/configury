@@ -33,7 +33,7 @@ Using default config section other than 'global'
 
 ```js
 var configury = require('configury')
-  , config = configury('properties.json', 'myDefaultConfigSection')
+  , config = configury('./properties.json', 'myDefaultConfigSection')
 
 ```
 
