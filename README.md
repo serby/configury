@@ -113,11 +113,30 @@ config.raw()
 
 ### config.merge()
 
+Merging an object over a property in the configuration
+
 ```js
 var configury = require('configury')
   , config = configury('./properties.json')
 
+config.set('foo', 'bar')
+//-> { "global": { "foo": "bar" } ... }
+config.merge({ 'foo': 'woo' })
+//-> { "global": { "foo": "woo" } ... }
 
+```
+
+Merging an object over a property in 'mySection'
+
+```js
+var configury = require('configury')
+  , config = configury('./properties.json')
+  , mySection = config.section('mySection')
+
+mySection.set('foo', 'bar')
+//-> { "global": { ... } "mySection": { "foo": "bar" } }
+mySection.merge({ 'foo': 'woo' })
+//-> { "global": { ... } "mySection": { "foo": "woo" } }
 
 ```
 
