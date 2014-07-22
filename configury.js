@@ -58,7 +58,7 @@ function Configury(configPath, defaultSection) {
   }
 
   self.write = function write(path, cb) {
-    var json = JSON.stringify(raw, 2)
+    var json = JSON.stringify(raw, false, 2)
     path = configPath || path
     if (path === undefined) {
       throw new Error('No path provided to write config')

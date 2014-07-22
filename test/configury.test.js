@@ -67,13 +67,31 @@ describe('configury.js', function () {
       var configury = createConfigury()
         , fsMock =
         { writeFileSync: function (path, data) {
-              data.should.eql(JSON.stringify(configury.raw()))
+              data.should.eql(JSON.stringify(configury.raw(), false, 2))
             }
         }
       createConfigury.__set__('fs', fsMock)
 
       configury.set('foo', 'bar')
       configury.section('custom').set('foo', 'rab')
+      configury.write('./write-test.json')
+    })
+
+    it('should write a pretty JSON file', function () {
+      var configury = createConfigury()
+        , fsMock =
+        { writeFileSync: function (path, data) {
+              data.should.eql([ '{'
+              , '  "global": {'
+              , '    "foo": "bar"'
+              , '  }'
+              , '}'
+              ].join('\n'))
+            }
+        }
+      createConfigury.__set__('fs', fsMock)
+
+      configury.set('foo', 'bar')
       configury.write('./write-test.json')
     })
 
