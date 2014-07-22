@@ -77,6 +77,23 @@ describe('configury.js', function () {
       configury.write('./write-test.json')
     })
 
+    it('should throw Invalid JSON', function () {
+      var fsMock =
+        { readFileSync: function () {
+              return '{ bad }'
+            }
+        , existsSync: function () {
+            return true
+          }
+        }
+      createConfigury.__set__('fs', fsMock);
+
+      (function() {
+        createConfigury('./bad.json')
+      }).should.throw(/Invalid JSON/)
+
+    })
+
     it('should write to original path', function () {
       var configury
         , mockConfig = JSON.stringify({})

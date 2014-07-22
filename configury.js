@@ -12,7 +12,16 @@ function Configury(configPath, defaultSection) {
   if (!defaultSection) defaultSection = 'global'
 
   if (configPath && fs.existsSync(configPath)) {
-    raw = JSON.parse(fs.readFileSync(configPath))
+    try {
+      raw = JSON.parse(fs.readFileSync(configPath))
+    } catch (e) {
+      if (e instanceof SyntaxError) {
+        throw new SyntaxError('Invalid JSON in ' + configPath)
+      } else {
+        throw e
+      }
+    }
+
   }
 
   function substitute(config, value) {
