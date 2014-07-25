@@ -59,7 +59,7 @@ function Configury(configPath, defaultSection) {
 
   self.write = function write(path, cb) {
     var json = JSON.stringify(raw, 2)
-    path = configPath || path
+    path = path || configPath
     if (path === undefined) {
       throw new Error('No path provided to write config')
     }
@@ -85,17 +85,17 @@ function Configury(configPath, defaultSection) {
   }
 
   function mergeConfig(data) {
-      var configData = data
+    var configData = data
 
-      if (typeof data === 'string') {
-        configData = JSON.parse(fs.readFileSync(data))
-      }
-      if (typeof this === 'object') {
-        merge(raw[this], configData)
-      } else {
-        merge(raw, configData)
-      }
+    if (typeof data === 'string') {
+      configData = JSON.parse(fs.readFileSync(data))
     }
+    if (typeof this === 'object') {
+      merge(raw[this], configData)
+    } else {
+      merge(raw, configData)
+    }
+  }
 
   self.merge = mergeConfig
 
