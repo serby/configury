@@ -151,6 +151,21 @@ mySection.merge({ 'foo': 'woo' })
 
 ```
 
+### Substitution
+
+By default, configury will substitute any values that match the pattern: `%string%`. This will substitute the current value with the value of that key if it exists. E.g:
+
+```js
+var configury = require('configury')
+  , config = configury()
+
+config.set('url', 'http://localhost:3000')
+config.set('loginUrl', '%url%/login')
+
+console.log(config().loginUrl)
+//-> 'http://localhost:3000/login'
+```
+
 ## Credits
 [Paul Serby](https://github.com/serby/) follow me on twitter [@serby](http://twitter.com/serby)
 
