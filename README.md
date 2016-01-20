@@ -37,6 +37,15 @@ var configury = require('configury')
 
 ```
 
+Using configuration already loaded on memory (you can't use `.write` if you load config this way):
+
+```js
+var configury = require('configury')
+  , properties = require('./properties.json')
+  , config = configury(properties)
+
+```
+
 ### config.raw()
 
 ```js

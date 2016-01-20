@@ -11,7 +11,7 @@ function Configury(configPath, defaultSection) {
 
   if (!defaultSection) defaultSection = 'global'
 
-  if (configPath && fs.existsSync(configPath)) {
+  if (configPath && typeof configPath === 'string' && fs.existsSync(configPath)) {
     try {
       raw = JSON.parse(fs.readFileSync(configPath))
     } catch (e) {
@@ -21,7 +21,9 @@ function Configury(configPath, defaultSection) {
         throw e
       }
     }
-
+  }
+  else if (configPath && typeof configPath === 'object') {
+    raw = configPath
   }
 
   function substitute(config, value) {
