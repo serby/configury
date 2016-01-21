@@ -16,6 +16,19 @@ describe('configury.js', function () {
     config.should.eql({})
   })
 
+  it('should allow to use object rather than file path', function () {
+    var mockConfig =
+      { global:
+        { foo: 'bar' }
+      }
+
+    var configury = createConfigury(mockConfig)
+      , config = configury()
+
+    config.should.be.type('object')
+    config.should.have.property('foo', 'bar')
+  })
+
   describe('#set', function () {
     it('should add a global property', function () {
       var configury = createConfigury()
