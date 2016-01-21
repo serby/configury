@@ -85,17 +85,17 @@ function Configury(configPath, defaultSection) {
   }
 
   function mergeConfig(data) {
-      var configData = data
+    var configData = data
 
-      if (typeof data === 'string') {
-        configData = JSON.parse(fs.readFileSync(data))
-      }
-      if (typeof this === 'object') {
-        merge(raw[this], configData)
-      } else {
-        merge(raw, configData)
-      }
+    if (typeof data === 'string') {
+      configData = JSON.parse(fs.readFileSync(data))
     }
+    if (typeof this === 'object') {
+      merge(raw[this], configData)
+    } else {
+      merge(raw, configData)
+    }
+  }
 
   self.merge = mergeConfig
 
