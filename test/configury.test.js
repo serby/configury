@@ -1,4 +1,5 @@
-var rewire = require('rewire')
+var assert = require('assert')
+  , rewire = require('rewire')
   , createConfigury = rewire('..')
 
 describe('configury.js', function () {
@@ -28,6 +29,11 @@ describe('configury.js', function () {
 
     })
 
+    it('should return itself', function () {
+      var configury = createConfigury()
+      assert.equal(configury.set('foo', 'bar'), configury)
+    })
+
     it('should allow section based #set', function () {
       var configury = createConfigury()
         , config
@@ -36,7 +42,6 @@ describe('configury.js', function () {
       config = configury('custom')
       config.foo.should.eql('bar')
       configury.raw().custom.foo.should.eql('bar')
-
     })
 
     describe('sections should override global properties', function () {
@@ -159,6 +164,11 @@ describe('configury.js', function () {
 
       config = configury()
       config.foo.should.eql('woo')
+    })
+
+    it('should return itself', function () {
+      var configury = createConfigury()
+      assert.equal(configury.merge({ global: { foo: 'woo' } }), configury)
     })
 
     it('should overlay properties from files', function () {

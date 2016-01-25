@@ -72,6 +72,7 @@ function Configury(configPath, defaultSection) {
 
   function setKey(key, value) {
     raw[this][key] = value
+    return self
   }
 
   self.set = setKey.bind('global')
@@ -95,9 +96,12 @@ function Configury(configPath, defaultSection) {
     } else {
       merge(raw, configData)
     }
+    return self
   }
 
   self.merge = mergeConfig
+
+  self.getConfig = self
 
   return self
 }
