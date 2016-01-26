@@ -4,6 +4,7 @@
   "description": "Easy management of environment based configuration",
   "version": "0.2.0",
   "tags": [],
+  "license": "ISC",
   "repository": {
     "type": "git",
     "url": "git@github.com:serby/configury"
