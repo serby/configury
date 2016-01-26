@@ -13,25 +13,25 @@
   },
   "main": "configury.js",
   "scripts": {
-    "lint": "./node_modules/.bin/jshint . --reporter=./node_modules/jshint-full-path/index.js",
+    "lint": "jshint . --reporter=./node_modules/jshint-full-path/index.js",
     "pretest": "npm run-script lint",
-    "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha -- -R spec -r should",
-    "posttest": "./node_modules/.bin/istanbul check-coverage && rm -rf coverage",
+    "test": "istanbul cover _mocha -- -R spec -r should",
+    "posttest": "istanbul check-coverage",
     "prepublish": "npm test && npm prune"
   },
   "engines": {
     "node": ">=0.10"
   },
   "dependencies": {
-    "lodash.merge": "^2.4.1",
+    "lodash.merge": "^4.0.1",
     "traverse": "^0.6.6"
   },
   "devDependencies": {
-    "istanbul": "~0.1.44",
-    "jshint": "~2.3.0",
-    "jshint-full-path": "~0.1.0",
-    "mocha": "1",
-    "rewire": "^2.1.0",
-    "should": "2"
+    "istanbul": "^0.4.2",
+    "jshint": "^2.9.1",
+    "jshint-full-path": "^1.1.1",
+    "mocha": "^2.3.4",
+    "rewire": "^2.5.1",
+    "should": "^8.2.0"
   }
 }
