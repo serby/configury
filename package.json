@@ -2,7 +2,7 @@
   "author": "Paul Serby <paul@serby.net>",
   "name": "configury",
   "description": "Easy management of environment based configuration",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "tags": [],
   "license": "ISC",
   "repository": {
