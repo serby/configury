@@ -2,7 +2,7 @@
 
 Easy management of environment based configuration
 
-[![build status](https://secure.travis-ci.org/serby/configury.png)](http://travis-ci.org/serby/configury)
+[![build status](https://secure.travis-ci.org/serby/configury.png)](http://travis-ci.org/serby/configury) [![Greenkeeper badge](https://badges.greenkeeper.io/serby/configury.svg)](https://greenkeeper.io/)
 
 ## Installation
 
