@@ -31,8 +31,8 @@
     "istanbul": "^0.4.2",
     "jshint": "^2.9.1",
     "jshint-full-path": "^1.1.1",
-    "mocha": "^2.3.4",
-    "rewire": "^2.5.1",
-    "should": "^8.2.0"
+    "mocha": "^6.1.4",
+    "rewire": "^4.0.1",
+    "should": "^13.2.3"
   }
 }
