@@ -1,6 +1,6 @@
-var assert = require('assert'),
-  rewire = require('rewire'),
-  createConfigury = rewire('..')
+var assert = require('assert')
+var rewire = require('rewire')
+var createConfigury = rewire('..')
 
 describe('configury.js', function() {
   it('should return a function', function() {
@@ -9,8 +9,8 @@ describe('configury.js', function() {
   })
 
   it('should return config object', function() {
-    var configury = createConfigury(),
-      config = configury()
+    var configury = createConfigury()
+    var config = configury()
 
     config.should.be.type('object')
     config.should.eql({})
@@ -18,8 +18,8 @@ describe('configury.js', function() {
 
   describe('#set', function() {
     it('should add a global property', function() {
-      var configury = createConfigury(),
-        config
+      var configury = createConfigury()
+      var config
 
       configury.set('foo', 'bar')
       config = configury()
@@ -29,12 +29,12 @@ describe('configury.js', function() {
 
     it('should return itself', function() {
       var configury = createConfigury()
-      assert.equal(configury.set('foo', 'bar'), configury)
+      assert.strictEqual(configury.set('foo', 'bar'), configury)
     })
 
     it('should allow section based #set', function() {
-      var configury = createConfigury(),
-        config
+      var configury = createConfigury()
+      var config
 
       configury.section('custom').set('foo', 'bar')
       config = configury('custom')
@@ -43,8 +43,8 @@ describe('configury.js', function() {
     })
 
     describe('sections should override global properties', function() {
-      var configury = createConfigury(),
-        config
+      var configury = createConfigury()
+      var config
 
       configury.set('foo', 'bar')
       configury.section('custom').set('foo', 'rab')
@@ -65,12 +65,12 @@ describe('configury.js', function() {
     })
 
     it('should write to give path', function() {
-      var configury = createConfigury(),
-        fsMock = {
-          writeFileSync: function(path, data) {
-            data.should.eql(JSON.stringify(configury.raw(), false, 2))
-          }
+      var configury = createConfigury()
+      var fsMock = {
+        writeFileSync: function(path, data) {
+          data.should.eql(JSON.stringify(configury.raw(), false, 2))
         }
+      }
       createConfigury.__set__('fs', fsMock)
 
       configury.set('foo', 'bar')
@@ -79,14 +79,14 @@ describe('configury.js', function() {
     })
 
     it('should write a pretty JSON file', function() {
-      var configury = createConfigury(),
-        fsMock = {
-          writeFileSync: function(path, data) {
-            data.should.eql(
-              ['{', '  "global": {', '    "foo": "bar"', '  }', '}'].join('\n')
-            )
-          }
+      var configury = createConfigury()
+      var fsMock = {
+        writeFileSync: function(path, data) {
+          data.should.eql(
+            ['{', '  "global": {', '    "foo": "bar"', '  }', '}'].join('\n')
+          )
         }
+      }
       createConfigury.__set__('fs', fsMock)
 
       configury.set('foo', 'bar')
@@ -103,27 +103,26 @@ describe('configury.js', function() {
         }
       }
       createConfigury.__set__('fs', fsMock)
-
       ;(function() {
         createConfigury('./bad.json')
       }.should.throw(/Invalid JSON/))
     })
 
     it('should write to original path', function() {
-      var configury,
-        mockConfig = JSON.stringify({}),
-        fsMock = {
-          existsSync: function() {
-            // Assuming {} is because the config hasn't yet been created
-            return mockConfig !== '{}'
-          },
-          readFileSync: function() {
-            return mockConfig
-          },
-          writeFileSync: function(path, data) {
-            mockConfig = data
-          }
+      var configury
+      var mockConfig = JSON.stringify({})
+      var fsMock = {
+        existsSync: function() {
+          // Assuming {} is because the config hasn't yet been created
+          return mockConfig !== '{}'
+        },
+        readFileSync: function() {
+          return mockConfig
+        },
+        writeFileSync: function(path, data) {
+          mockConfig = data
         }
+      }
 
       createConfigury.__set__('fs', fsMock)
 
@@ -146,8 +145,8 @@ describe('configury.js', function() {
 
   describe('#merge()', function() {
     it('should overlay properties from objects', function() {
-      var configury = createConfigury(),
-        config
+      var configury = createConfigury()
+      var config
 
       configury.set('foo', 'bar')
       configury.merge({ global: { foo: 'woo' } })
@@ -158,17 +157,17 @@ describe('configury.js', function() {
 
     it('should return itself', function() {
       var configury = createConfigury()
-      assert.equal(configury.merge({ global: { foo: 'woo' } }), configury)
+      assert.strictEqual(configury.merge({ global: { foo: 'woo' } }), configury)
     })
 
     it('should overlay properties from files', function() {
-      var configury = createConfigury(),
-        config,
-        fsMock = {
-          readFileSync: function() {
-            return JSON.stringify({ global: { foo: 'woo' } })
-          }
+      var configury = createConfigury()
+      var config
+      var fsMock = {
+        readFileSync: function() {
+          return JSON.stringify({ global: { foo: 'woo' } })
         }
+      }
       createConfigury.__set__('fs', fsMock)
 
       configury.set('foo', 'bar')
@@ -179,13 +178,13 @@ describe('configury.js', function() {
     })
 
     it('should overlay properties from files', function() {
-      var configury = createConfigury(),
-        config,
-        fsMock = {
-          readFileSync: function() {
-            return JSON.stringify({ foo: 'woo' })
-          }
+      var configury = createConfigury()
+      var config
+      var fsMock = {
+        readFileSync: function() {
+          return JSON.stringify({ foo: 'woo' })
         }
+      }
       createConfigury.__set__('fs', fsMock)
 
       configury.section('custom').set('foo', 'bar')
@@ -197,8 +196,8 @@ describe('configury.js', function() {
     })
 
     it('should overlay properties from objects on sections', function() {
-      var configury = createConfigury(),
-        config
+      var configury = createConfigury()
+      var config
 
       configury.section('custom').set('foo', 'bar')
       configury.section('custom').merge({ foo: 'woo' })
@@ -211,8 +210,8 @@ describe('configury.js', function() {
 
   describe('#substitution', function() {
     it('should substitute pattern from existing property', function() {
-      var configury = createConfigury(),
-        config
+      var configury = createConfigury()
+      var config
       configury.set('foo', 'bar')
       configury.set('too', '%foo%/woo')
       config = configury()
@@ -221,8 +220,8 @@ describe('configury.js', function() {
 
     // This needs implementing
     it.skip('should substitute nested pattern from existing property', function() {
-      var configury = createConfigury(),
-        config
+      var configury = createConfigury()
+      var config
       configury.set('foo', { bar: 'hoo' })
       configury.set('too', '%foo.bar%/woo')
       config = configury()

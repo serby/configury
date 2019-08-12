@@ -1,6 +1,6 @@
-var merge = require('lodash.merge'),
-  fs = require('fs'),
-  traverse = require('traverse')
+var merge = require('lodash.merge')
+var fs = require('fs')
+var traverse = require('traverse')
 
 module.exports = Configury
 
