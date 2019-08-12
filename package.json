@@ -14,25 +14,32 @@
   },
   "main": "configury.js",
   "scripts": {
-    "lint": "jshint . --reporter=./node_modules/jshint-full-path/index.js",
-    "pretest": "npm run-script lint",
-    "test": "istanbul cover _mocha -- -R spec -r should",
-    "posttest": "istanbul check-coverage",
+    "lint": "eslint -f unix .",
+    "test": "nyc mocha test/*.test.js --require should",
+    "prettier": "prettier --write '**/*.js'",
     "prepublish": "npm test && npm prune"
   },
   "engines": {
-    "node": ">=0.10"
+    "node": ">=8"
   },
   "dependencies": {
-    "lodash.merge": "^4.0.1",
+    "lodash.merge": "^4.6.2",
     "traverse": "^0.6.6"
   },
   "devDependencies": {
-    "istanbul": "^0.4.2",
-    "jshint": "^2.9.1",
-    "jshint-full-path": "^1.1.1",
-    "mocha": "^2.3.4",
-    "rewire": "^2.5.1",
-    "should": "^8.2.0"
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-config-prettier-standard": "^3.0.1",
+    "eslint-config-standard": "^13.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "mocha": "^6.2.0",
+    "nyc": "^14.1.1",
+    "prettier": "^1.18.2",
+    "rewire": "^4.0.1",
+    "should": "^13.2.3"
   }
 }
