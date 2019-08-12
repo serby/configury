@@ -15,13 +15,12 @@
   "main": "configury.js",
   "scripts": {
     "lint": "eslint -f unix .",
-    "test": "istanbul cover _mocha -- -R spec -r should",
-    "posttest": "istanbul check-coverage",
+    "test": "nyc mocha test/*.test.js --require should",
     "prettier": "prettier --write '**/*.js'",
     "prepublish": "npm test && npm prune"
   },
   "engines": {
-    "node": ">=0.10"
+    "node": ">=8"
   },
   "dependencies": {
     "lodash.merge": "^4.6.2",
