@@ -1,6 +1,6 @@
-var merge = require('lodash.merge')
-  , fs = require('fs')
-  , traverse = require('traverse');
+var merge = require('lodash.merge'),
+  fs = require('fs'),
+  traverse = require('traverse')
 
 module.exports = Configury
 
@@ -21,14 +21,13 @@ function Configury(configPath, defaultSection) {
         throw e
       }
     }
-
   }
 
   function substitute(config, value) {
     if (typeof value === 'string') {
       return value.replace(/%([a-zA-Z.-_]+)%/g, function(match, propertyName) {
-          return config[propertyName] || value
-        })
+        return config[propertyName] || value
+      })
     }
     return value
   }
@@ -43,12 +42,11 @@ function Configury(configPath, defaultSection) {
         config = merge({}, raw.global, raw[section])
       }
 
-      traverse(config).forEach(function (value) {
+      traverse(config).forEach(function(value) {
         this.update(substitute(config, value))
       })
-
     } catch (e) {
-      throw new Error('No section \'' + section + '\'')
+      throw new Error("No section '" + section + "'")
     }
     return config
   }
@@ -81,8 +79,10 @@ function Configury(configPath, defaultSection) {
     if (raw[sectionName] === undefined) {
       raw[sectionName] = {}
     }
-    return { set: setKey.bind(sectionName)
-      , merge: mergeConfig.bind(sectionName) }
+    return {
+      set: setKey.bind(sectionName),
+      merge: mergeConfig.bind(sectionName)
+    }
   }
 
   function mergeConfig(data) {

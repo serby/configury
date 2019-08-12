@@ -14,9 +14,10 @@
   },
   "main": "configury.js",
   "scripts": {
-    "lint": "jshint . --reporter=./node_modules/jshint-full-path/index.js",
+    "lint": "eslint -f unix .",
     "test": "istanbul cover _mocha -- -R spec -r should",
     "posttest": "istanbul check-coverage",
+    "prettier": "prettier --write '**/*.js'",
     "prepublish": "npm test && npm prune"
   },
   "engines": {
