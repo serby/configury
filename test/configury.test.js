@@ -64,7 +64,7 @@ describe('configury.js', function() {
       }.should.throw('No path provided to write config'))
     })
 
-    it('should write to give path', function() {
+    it('should write to given path', function() {
       var configury = createConfigury()
       var fsMock = {
         writeFileSync: function(path, data) {

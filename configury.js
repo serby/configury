@@ -4,19 +4,22 @@ var traverse = require('traverse')
 
 module.exports = Configury
 
-function Configury(configPath, defaultSection) {
-  var raw = {
-    global: {}
-  }
+function Configury(config, defaultSection) {
+  var isConfigObj = typeof config === 'object'
+  var raw = isConfigObj
+    ? config
+    : {
+        global: {}
+      }
 
   if (!defaultSection) defaultSection = 'global'
 
-  if (configPath && fs.existsSync(configPath)) {
+  if (!isConfigObj && config && fs.existsSync(config)) {
     try {
-      raw = JSON.parse(fs.readFileSync(configPath))
+      raw = JSON.parse(fs.readFileSync(config))
     } catch (e) {
       if (e instanceof SyntaxError) {
-        throw new SyntaxError('Invalid JSON in ' + configPath)
+        throw new SyntaxError('Invalid JSON in ' + config)
       } else {
         throw e
       }
@@ -57,7 +60,7 @@ function Configury(configPath, defaultSection) {
 
   self.write = function write(path, cb) {
     var json = JSON.stringify(raw, false, 2)
-    path = configPath || path
+    path = isConfigObj ? path : path || config
     if (path === undefined) {
       throw new Error('No path provided to write config')
     }
