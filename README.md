@@ -10,13 +10,13 @@ Easy management of environment based configuration
 
 ## Usage
 
-### configury([path, defaultSection])
+### configury([pathOrConfig, defaultSection])
 
 Using in-memory configuration
 
 ```js
-var configury = require('configury')
-  , config = configury()
+const configury = require('configury')
+const config = configury()
 
 ```
 
@@ -24,24 +24,40 @@ Using configuration file on disk
 
 
 ```js
-var configury = require('configury')
-  , config = configury('./properties.json')
+const configury = require('configury')
+const config = configury('./properties.json')
 
 ```
 
 Using default config section other than 'global'
 
 ```js
-var configury = require('configury')
-  , config = configury('./properties.json', 'myDefaultConfigSection')
+const configury = require('configury')
+const config = configury('./properties.json', 'myDefaultConfigSection')
+
+```
+
+Using existing config object
+
+```js
+const config = {
+  global: {
+    foo: 'bar'
+  },
+  sectionName: {
+    bar: 'baz'
+  }
+}
+const configury = require('configury')
+const config = configury(config)
 
 ```
 
 ### config.raw()
 
 ```js
-var configury = require('configury')
-  , config = configury('./properties.json')
+const configury = require('configury')
+const config = configury('./properties.json')
 
 config.raw()
 //-> { "global": { "foo": "bar" }, "development": { "foo": "bar" } ... }
@@ -52,8 +68,8 @@ config.raw()
 Save the current configuration in memory to disk
 
 ```js
-var configury = require('configury')
-  , config = configury('./properties.json')
+const configury = require('configury')
+const config = configury('./properties.json')
 
 // Write to './properties.json' file on disk synchronously
 config.write()
@@ -77,8 +93,8 @@ config.write('myBackupProperties.json')
 Setting a variable in 'global' configuration
 
 ```js
-var configury = require('configury')
-  , config = configury('./properties.json')
+const configury = require('configury')
+const config = configury('./properties.json')
 
 config.set('Alice', 'Bob')
 config.raw()
@@ -89,8 +105,8 @@ config.raw()
 Setting a variable in 'myCustomGlobal'
 
 ```js
-var configury = require('configury')
-  , config = configury('./properties.json', 'myCustomGlobal')
+const configury = require('configury')
+const config = configury('./properties.json', 'myCustomGlobal')
 
 config.set('Alice', 'Bob')
 config.raw()
@@ -101,10 +117,10 @@ config.raw()
 ### config.section(section)
 
 ```js
-var configury = require('configury')
-  , config = configury('./properties.json', 'myCustomGlobal')
+const configury = require('configury')
+const config = configury('./properties.json', 'myCustomGlobal')
 
-var mySection = config.section('mySection')
+const mySection = config.section('mySection')
 //-> mySection = { set: function(key, value), merge: function(object) }
 
 ```
@@ -112,9 +128,9 @@ var mySection = config.section('mySection')
 Setting a variable in 'mySection'
 
 ```js
-var configury = require('configury')
-  , config = configury('./properties.json')
-  , mySection = config.section('mySection')
+const configury = require('configury')
+const config = configury('./properties.json')
+const mySection = config.section('mySection')
 
 mySection.set('Alice', 'Bob')
 config.raw()
@@ -127,8 +143,8 @@ config.raw()
 Merging an object over a property in the configuration
 
 ```js
-var configury = require('configury')
-  , config = configury('./properties.json')
+const configury = require('configury')
+const config = configury('./properties.json')
 
 config.set('foo', 'bar')
 //-> { "global": { "foo": "bar" } ... }
@@ -140,9 +156,9 @@ config.merge({ 'global': { 'foo': 'woo' }, 'pickles': 'bananas' })
 Merging an object over a property in 'mySection'
 
 ```js
-var configury = require('configury')
-  , config = configury('./properties.json')
-  , mySection = config.section('mySection')
+const configury = require('configury')
+const config = configury('./properties.json')
+const mySection = config.section('mySection')
 
 mySection.set('foo', 'bar')
 //-> { "global": { ... } "mySection": { "foo": "bar" } }
@@ -156,8 +172,8 @@ mySection.merge({ 'foo': 'woo' })
 By default, configury will substitute any values that match the pattern: `%string%`. This will substitute the current value with the value of that key if it exists. E.g:
 
 ```js
-var configury = require('configury')
-  , config = configury()
+const configury = require('configury')
+const config = configury()
 
 config.set('url', 'http://localhost:3000')
 config.set('loginUrl', '%url%/login')
