@@ -1,13 +1,13 @@
 {
   "author": "Paul Serby <paul@serby.net>",
-  "name": "configury",
+  "name": "@clocklimited/configury",
   "description": "Easy management of environment based configuration",
   "version": "0.3.0",
   "tags": [],
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git@github.com:serby/configury"
+    "url": "git@github.com:clocklimited/configury"
   },
   "publishConfig": {
     "registry": "http://registry.npmjs.org"
