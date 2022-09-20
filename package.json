@@ -20,7 +20,7 @@
     "prepublish": "npm test && npm prune"
   },
   "engines": {
-    "node": ">=8"
+    "node": ">=14"
   },
   "dependencies": {
     "lodash.merge": "^4.6.2",
