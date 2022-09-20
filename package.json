@@ -12,6 +12,9 @@
   "publishConfig": {
     "registry": "http://registry.npmjs.org"
   },
+  "files": [
+    "configury.js"
+  ],
   "main": "configury.js",
   "scripts": {
     "lint": "eslint -f unix .",
